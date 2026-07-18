@@ -28,7 +28,7 @@
             padding: 20px;
         }
 
-        /* กล่องฟอร์มดีไซน์กระจกฝ้า (Glassmorphism) สวยสะดุดตา */
+        /* กล่องฟอร์มดีไซน์กระจกฝ้า (Glassmorphism) */
         .form-container {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(15px);
@@ -129,14 +129,14 @@
             padding: 0 10px;
         }
 
-        /* โซนปุ่มเชื่อมต่อภายนอก (Social Login) */
+        /* โซนปุ่มเชื่อมต่อภายนอก */
         .social-group {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        /* ปุ่มเชื่อมต่อกับ Discord (OAuth2 แบบสวยงามพรีเมียม) */
+        /* ปุ่มเชื่อมต่อกับ Discord สีฟ้า/น้ำเงิน */
         .discord-btn {
             width: 100%;
             padding: 14px;
@@ -153,7 +153,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
-            text-decoration: none; /* ลบเส้นใต้ลิงก์ */
+            text-decoration: none;
         }
 
         .discord-btn:hover {
@@ -162,7 +162,7 @@
             box-shadow: 0 6px 18px rgba(88, 101, 242, 0.4);
         }
 
-        /* 5. แถบปุ่มกดยืนยันผ่าน Google (อยู่ล่างสุด) */
+        /* แถบปุ่มกดยืนยันผ่าน Google */
         .google-btn-wrapper {
             display: flex;
             justify-content: center;
@@ -198,14 +198,13 @@
         </div>
 
         <div class="social-group">
-            <!-- ปุ่มเชื่อมต่อกับ Discord ด้วย Link OAuth2 ของคุณแบบตรงตัว -->
+            <!-- ปุ่มเชื่อมต่อกับ Discord ของคุณ -->
             <a href="https://discord.com/oauth2/authorize?client_id=1525854058835869807&response_type=code&redirect_uri=https%3A%2F%2Fthanaduangnamo-sketch.github.io%2Fshop.github.io%2F&integration_type=1&scope=webhook.incoming+identify" class="discord-btn">
                 <i class="fa-brands fa-discord"></i> เชื่อมต่อกับ Discord
             </a>
 
-            <!-- 5. แถบปุ่มกดยืนยันผ่าน Google (อยู่ล่างสุดของหน้าจอ) -->
+            <!-- 5. แถบปุ่มกดยืนยันผ่าน Google (อยู่ล่างสุด) -->
             <div class="google-btn-wrapper">
-                <!-- ตั้งค่า API หน้าบ้านของ Google -->
                 <div id="g_id_onload"
                      data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
                      data-context="signin"
@@ -228,7 +227,6 @@
     </div>
 
     <script>
-        // ฟังก์ชันถอดรหัสข้อมูลโปรไฟล์ที่ Google ส่งกลับมา
         function parseJwt(token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -238,7 +236,6 @@
             return JSON.parse(jsonPayload);
         }
 
-        // ดึงข้อมูลเมื่อยืนยันผ่าน Google สำเร็จ
         function handleCredentialResponse(response) {
             try {
                 const responsePayload = parseJwt(response.credential);
@@ -250,11 +247,9 @@
             }
         }
 
-        // ฟังก์ชันเมื่อกดปุ่มยืนยันฟอร์มล่างสุด
         function handleSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
             alert(`สมัครสมาชิกสำเร็จ!\nยินดีต้อนรับคุณ ${name}`);
         }
     </script>
