@@ -14,7 +14,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* พื้นหลังโทนสีขาว ละมุนด้วยแสงออร่าสีฟ้าฟุ้ง ๆ */
         body {
             min-height: 100vh;
             background-color: #ffffff;
@@ -27,7 +26,6 @@
             padding: 20px;
         }
 
-        /* กล่องฟอร์มดีไซน์กระจกฝ้า (Glassmorphism) */
         .form-container {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(15px);
@@ -41,7 +39,6 @@
             text-align: center;
         }
 
-        /* 1. ปุ่มสมัครบัญชี (ปุ่มแรกด้านบนสุด) */
         .top-title-btn {
             width: 100%;
             padding: 14px;
@@ -56,7 +53,6 @@
             box-shadow: 0 6px 15px rgba(14, 165, 233, 0.25);
         }
 
-        /* ส่วนของฟอร์มกรอกข้อมูล */
         .input-group {
             text-align: left;
             margin-bottom: 20px;
@@ -70,7 +66,6 @@
             margin-bottom: 8px;
         }
 
-        /* 2. ช่องกรอก: ชื่อ และ 3. ช่องกรอก: อีเมล */
         .input-group input {
             width: 100%;
             padding: 14px 20px;
@@ -87,7 +82,6 @@
             box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
         }
 
-        /* 4. ปุ่มกดยืนยัน (อยู่ล่างสุดของฟอร์ม) */
         .confirm-btn {
             width: 100%;
             padding: 14px;
@@ -108,7 +102,6 @@
             box-shadow: 0 8px 22px rgba(14, 165, 233, 0.45);
         }
 
-        /* เส้นคั่นกลาง */
         .divider {
             margin: 25px 0;
             display: flex;
@@ -128,14 +121,12 @@
             padding: 0 10px;
         }
 
-        /* โซนปุ่มเชื่อมต่อภายนอก */
         .social-group {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        /* ปุ่มยืนยันผ่าน Discord สีน้ำเงินดิสคอร์ดแบบพรีเมียม */
         .discord-btn {
             width: 100%;
             padding: 14px;
@@ -152,7 +143,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
-            text-decoration: none; /* ลบเส้นใต้ลิงก์ */
+            text-decoration: none;
         }
 
         .discord-btn:hover {
@@ -165,23 +156,19 @@
 <body>
 
     <div class="form-container">
-        <!-- 1. ปุ่มสมัครบัญชี (ปุ่มแรกด้านบน) -->
         <button class="top-title-btn">สมัครบัญชี</button>
 
         <form onsubmit="handleSubmit(event)">
-            <!-- 2. ช่องกรอก: ชื่อ -->
             <div class="input-group">
                 <label for="name">ชื่อผู้ใช้งาน</label>
                 <input type="text" id="name" required placeholder="กรอกชื่อของคุณ">
             </div>
 
-            <!-- 3. ช่องกรอก: อีเมล -->
             <div class="input-group">
                 <label for="email">อีเมล</label>
                 <input type="email" id="email" required placeholder="example@mail.com">
             </div>
 
-            <!-- 4. ปุ่มกดยืนยัน (อยู่ล่างสุดของฟอร์ม) -->
             <button type="submit" class="confirm-btn">ยืนยันการสมัคร</button>
         </form>
 
@@ -190,7 +177,7 @@
         </div>
 
         <div class="social-group">
-            <!-- ปุ่มยืนยันผ่าน Discord ด้วย Link OAuth2 ใหม่ของคุณ -->
+            <!-- ปุ่มยืนยันผ่าน Discord ลิงก์ใหม่ล่าสุด -->
             <a href="https://discord.com/oauth2/authorize?client_id=1525854058835869807&response_type=code&redirect_uri=https%3A%2F%2Fthanaduangnamo-sketch.github.io%2Fshop.github.io%2F&scope=identify+messages.read" class="discord-btn">
                 <i class="fa-brands fa-discord"></i> ยืนยันผ่าน Discord
             </a>
@@ -200,8 +187,7 @@
     <script>
         function handleSubmit(event) {
             event.preventDefault();
-            const name = document.getElementById('name').value;
-            alert(`สมัครสมาชิกสำเร็จ!\nยินดีต้อนรับคุณ ${name}`);
+            alert("ส่งข้อมูลการสมัครเรียบร้อย!");
         }
     </script>
 </body>
