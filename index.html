@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สมัครบัญชี - OMMUNIFY</title>
-    <!-- โหลดไลบรารี API ของ Google -->
+    <!-- โหลดไลบรารี Google API และ FontAwesome สำหรับไอคอนดิสคอร์ด -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,6 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* พื้นหลังโทนสีขาว ละมุนด้วยแสงออร่าสีฟ้าฟุ้ง ๆ */
         body {
             min-height: 100vh;
             background-color: #ffffff;
@@ -26,23 +28,25 @@
             padding: 20px;
         }
 
+        /* กล่องฟอร์มดีไซน์กระจกฝ้า (Glassmorphism) สวยสะดุดตา */
         .form-container {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(14, 165, 233, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(14, 165, 233, 0.25);
             padding: 40px 30px;
-            border-radius: 24px;
+            border-radius: 28px;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.1);
+            max-width: 420px;
+            box-shadow: 0 15px 35px rgba(14, 165, 233, 0.15);
             text-align: center;
         }
 
+        /* 1. ปุ่มสมัครบัญชี (ปุ่มแรกด้านบนสุด) */
         .top-title-btn {
             width: 100%;
             padding: 14px;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #ffffff;
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
@@ -50,9 +54,10 @@
             border-radius: 50px;
             margin-bottom: 30px;
             cursor: default;
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 6px 15px rgba(14, 165, 233, 0.25);
         }
 
+        /* ส่วนของฟอร์มกรอกข้อมูล */
         .input-group {
             text-align: left;
             margin-bottom: 20px;
@@ -66,11 +71,12 @@
             margin-bottom: 8px;
         }
 
+        /* 2. ช่องกรอก: ชื่อ และ 3. ช่องกรอก: อีเมล */
         .input-group input {
             width: 100%;
             padding: 14px 20px;
             border: 1px solid #cbd5e1;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1rem;
             outline: none;
             transition: all 0.3s;
@@ -79,9 +85,10 @@
 
         .input-group input:focus {
             border-color: #0ea5e9;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
         }
 
+        /* 4. ปุ่มกดยืนยัน (อยู่ล่างสุดของฟอร์ม) */
         .confirm-btn {
             width: 100%;
             padding: 14px;
@@ -90,7 +97,7 @@
             color: #ffffff;
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
             transition: all 0.3s;
@@ -99,9 +106,10 @@
 
         .confirm-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+            box-shadow: 0 8px 22px rgba(14, 165, 233, 0.45);
         }
 
+        /* เส้นคั่นกลาง */
         .divider {
             margin: 25px 0;
             display: flex;
@@ -121,7 +129,40 @@
             padding: 0 10px;
         }
 
-        /* กล่องสำหรับใส่ปุ่มแท้ของ Google API */
+        /* โซนปุ่มเชื่อมต่อภายนอก (Social Login) */
+        .social-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* ปุ่มเชื่อมต่อกับ Discord (OAuth2 แบบสวยงามพรีเมียม) */
+        .discord-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #5865F2;
+            border: none;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
+            text-decoration: none; /* ลบเส้นใต้ลิงก์ */
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(88, 101, 242, 0.4);
+        }
+
+        /* 5. แถบปุ่มกดยืนยันผ่าน Google (อยู่ล่างสุด) */
         .google-btn-wrapper {
             display: flex;
             justify-content: center;
@@ -132,50 +173,62 @@
 <body>
 
     <div class="form-container">
+        <!-- 1. ปุ่มสมัครบัญชี (ปุ่มแรกด้านบน) -->
         <button class="top-title-btn">สมัครบัญชี</button>
 
         <form onsubmit="handleSubmit(event)">
+            <!-- 2. ช่องกรอก: ชื่อ -->
             <div class="input-group">
                 <label for="name">ชื่อผู้ใช้งาน</label>
                 <input type="text" id="name" required placeholder="กรอกชื่อของคุณ">
             </div>
 
+            <!-- 3. ช่องกรอก: อีเมล -->
             <div class="input-group">
                 <label for="email">อีเมล</label>
                 <input type="email" id="email" required placeholder="example@mail.com">
             </div>
 
+            <!-- 4. ปุ่มกดยืนยัน (อยู่ล่างสุดของฟอร์ม) -->
             <button type="submit" class="confirm-btn">ยืนยันการสมัคร</button>
         </form>
 
         <div class="divider">
-            <span>หรือ</span>
+            <span>หรือเชื่อมต่อระบบ</span>
         </div>
 
-        <!-- ปุ่ม Google แบบ Official จาก API ที่ระบบจะสร้างขึ้นให้อัตโนมัติ -->
-        <div class="google-btn-wrapper">
-            <div id="g_id_onload"
-                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
-                 data-context="signin"
-                 data-ux_mode="popup"
-                 data-callback="handleCredentialResponse"
-                 data-auto_prompt="false">
-            </div>
+        <div class="social-group">
+            <!-- ปุ่มเชื่อมต่อกับ Discord ด้วย Link OAuth2 ของคุณแบบตรงตัว -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1525854058835869807&response_type=code&redirect_uri=https%3A%2F%2Fthanaduangnamo-sketch.github.io%2Fshop.github.io%2F&integration_type=1&scope=webhook.incoming+identify" class="discord-btn">
+                <i class="fa-brands fa-discord"></i> เชื่อมต่อกับ Discord
+            </a>
 
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-shape="rectangular"
-                 data-theme="outline"
-                 data-text="continue_with"
-                 data-size="large"
-                 data-logo_alignment="left"
-                 data-width="340">
+            <!-- 5. แถบปุ่มกดยืนยันผ่าน Google (อยู่ล่างสุดของหน้าจอ) -->
+            <div class="google-btn-wrapper">
+                <!-- ตั้งค่า API หน้าบ้านของ Google -->
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="handleCredentialResponse"
+                     data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signup_with"
+                     data-size="large"
+                     data-logo_alignment="left"
+                     data-width="360">
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ฟังก์ชันถอดรหัส Token ที่ Google ส่งกลับมา (JWT) เพื่อเอาข้อมูลโปรไฟล์
+        // ฟังก์ชันถอดรหัสข้อมูลโปรไฟล์ที่ Google ส่งกลับมา
         function parseJwt(token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -185,28 +238,24 @@
             return JSON.parse(jsonPayload);
         }
 
-        // ฟังก์ชันทำงานเมื่อผู้ใช้ล็อกอินผ่าน Google สำเร็จ
+        // ดึงข้อมูลเมื่อยืนยันผ่าน Google สำเร็จ
         function handleCredentialResponse(response) {
             try {
-                // ดึงข้อมูลโปรไฟล์จาก Google Token
                 const responsePayload = parseJwt(response.credential);
-                
-                // เอาชื่อและอีเมลจาก Google มากรอกในช่อง Input ให้ทันที
                 document.getElementById('name').value = responsePayload.name;
                 document.getElementById('email').value = responsePayload.email;
-                
-                alert(`ดึงข้อมูลจาก Google สำเร็จ!\nยินดีต้อนรับคุณ: ${responsePayload.name}`);
+                alert(`ดึงข้อมูลโปรไฟล์ Google สำเร็จ!\nยินดีต้อนรับ: ${responsePayload.name}`);
             } catch (error) {
-                console.error("Error parsing Google response:", error);
-                alert("เกิดข้อผิดพลาดในการเชื่อมต่อกับ Google");
+                console.error(error);
             }
         }
 
+        // ฟังก์ชันเมื่อกดปุ่มยืนยันฟอร์มล่างสุด
         function handleSubmit(event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            alert(`สมัครบัญชีสำเร็จ!\nชื่อ: ${name}\nอีเมล: ${email}`);
+            alert(`สมัครสมาชิกสำเร็จ!\nยินดีต้อนรับคุณ ${name}`);
         }
     </script>
 </body>
